@@ -1,0 +1,72 @@
+Step For Configure Pool & Spa on Raspberry Pi
+
+1.	Install Apache
+	a.	Open Terminal type below commands
+		i.	“sudo apt-get update”
+		ii.	“sudo apt-get install apache2 apache2-doc apache2-utils”
+		iii.	“sudo restart apache2” OR “sudo service apache2 restart”
+
+2.	Install PHP
+	a.	Open Terminal and run below command
+		i.	“sudo apt-get install libapache2-mod-php5 php5 php-pear php5-xcache”
+
+3.	Install MySql
+	a.	Open Terminal and run below command
+		i.	“sudo apt-get install php5-mysql”
+		ii.	“sudo apt-get install mysql-server mysql-client”
+
+	OR
+
+Refer this link for installing Apache, PHP, MySql
+URL: http://www.raspipress.com/2012/09/tutorial-install-apache-php-and-mysql-on-raspberry-pi/
+
+
+4.	Install Curl and sockets extensions (which is required)
+	a.	Open Terminal type below commands
+		i.	“sudo apt-get install php5-curl”
+		ii.	“./configure --enable-sockets --with-sockets” OR “sudo apt-get install php-common”
+		iii.	“sudo restart apache2”  “sudo service apache2 restart”
+ 
+5.	Install PhpMyAdmin
+
+Refer below link to install PhpMyAdmin on Raspberry Pi machine.
+
+URL: http://www.raspipress.com/2012/09/tutorial-install-phpmyadmin-on-your-raspberry-pi/
+				  OR
+
+	a.	sudo apt-get install phpmyadmin
+	b.	Select apache2
+	c.	phpmyadmin with dbconfig-common YES
+	d.	Type password 'raspberry' when asked
+	e.	sudo nano /etc/apache2/apache2.conf
+	f.	Press ctrl + V Till end of page
+	g.	Insert At last 'Include /etc/phpmyadmin/apache.conf'
+	h.	Press ctrl + X and enter Y
+	i.	sudo service apache2 restart
+
+6.	Assinged 777 Permission to WWW folder
+	a.	Assigned 777 (read /write/ delete) permission to www folder using following command
+	sudo chmod -R 777 /var/www	
+
+7.	Files for  Get sensor Temperatures and Ip Change Functionality
+	a.	Download updated get_temp and_IP_change  code from 'https://github.com/sandeepnetwin/get_temp_and_IP_change'
+	b.	Copy  this  2 files (get_temp.php and ipchange.php)  from download to /var/www/
+	sudo cp -r /home/pi/Downloads/relayboard /var/www/
+	or   directly copy pest.
+
+8.	How to set cron job
+	a.	enter command  like
+		crontab -e
+	b.	Press ctrl + V Till end of page
+	c.	then insert cron command with file name like
+	d.	* * * * * php /var/www/phpfile name
+	e.	Set cron job command for ipchange file using following command
+	* * * * *  php  /var/www/ipchange.php
+
+9.	Set Offline poolspa  web portal
+	a.	Download updated offline poolspa  code from 'https://github.com/sandeepnetwin/offline_poolspa'
+	b.	Extract it and rename it from 'offline_poolspa-master' to 'offline_poolspa'.
+	c.	Copy it from download to /var/www/'.
+	d.	cp -r /home/pi/Downloads/offline_poolspa /var/www/ or copy pest through mouse click.
+	e.	open browser and hit url using your local ip address like  http://YOUER LOCAL IP/offline_poolspa
+

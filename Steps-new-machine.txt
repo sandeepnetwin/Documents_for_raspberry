@@ -1,0 +1,48 @@
+
+Steps to configure relayboard code on '72.193.26.56'
+
+Step 1: Download updated relayboard code from 'https://github.com/sandeepnetwin/relayboard'
+		- Extract it and rename it from 'relayboard-master' to 'relayboard'
+
+Step 2: Copy it from download to /var/www/
+>>cp -r /home/pi/Downloads/relayboard /var/www/
+
+Step 3: Install and update apache
+>>sudo apt-get update
+>>sudo apt-get install apache2 apache2-doc apache2-utils
+>>sudo service apache2 restart
+
+Step 4: Install PHP
+>>sudo apt-get install libapache2-mod-php5 php5 php-pear php5-xcache
+If not works then use below (unable to locate package libapache2-mod-php5)
+>>sudo apt-get install php5 php-pear php5-xcache
+
+Step 5: Install Mysql
+>>sudo apt-get install php5-mysql
+>>sudo apt-get install mysql-server mysql-client
+ - press y to continue
+ - Set root password to 'raspberry'
+
+Step 6: Install curl and socket extensions
+>>sudo apt-get install php5-curl
+>>sudo apt-get install php-common
+>>sudo service apache2 restart
+
+Step 7: Install PhpMyAdmin
+>>sudo apt-get install phpmyadmin
+ - Select apache2
+ - phpmyadmin with dbconfig-common YES
+ - Type password 'raspberry' when asked
+>>sudo nano /etc/apache2/apache2.conf
+ - Press ctrl + V Till end of page
+ - Insert At last 'Include /etc/phpmyadmin/apache.conf'
+ - Press ctrl + X and enter Y
+>>sudo service apache2 restart
+ - /etc/init.d/apache2 restart
+
+Step 8: Create and Import database
+ - Open browser and url 'http://localhost/phpmyadmin' in this case 'http://localhost:82/phpmyadmin'
+ - Type username as 'root' and password as 'raspberrry'
+ - Cilck on Database tab create 'relay_db' database.
+ - Select 'relay_db' database and click on import tab.
+ - Click on browse and select '/var/www/relayboard/db/relay_db.sql'
