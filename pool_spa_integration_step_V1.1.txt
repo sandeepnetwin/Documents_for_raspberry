@@ -70,3 +70,30 @@ URL: http://www.raspipress.com/2012/09/tutorial-install-phpmyadmin-on-your-raspb
 	d.	cp -r /home/pi/Downloads/offline_poolspa /var/www/ or copy pest through mouse click.
 	e.	open browser and hit url using your local ip address like  http://YOUER LOCAL IP/offline_poolspa
 
+10. Restart  Raspberrypi Device.  When Device does not responding  since last 1 hr or grater than.
+	a. Download updated ss_pool_spa  code from 'https://github.com/sandeepnetwin/ss_pool_spa'
+	b. Extract it and rename it from 'ss_pool_spa-master' to 'ss_pool_spa'.
+	c. Copy it from download to /var/www/'.
+	d. cp -r /home/pi/Downloads/offline_poolspa /var/www/ or copy pest through mouse click.
+	e. Open file path like  /var/www/ss_pool_spa/restart_system.php         insert your ospi port number like 8080 
+	f. Open phpmyadmin and  create new table “ss_pool_spa”
+	g. Import sql file which present on /var/www/ss_pool_spa/db folder.
+	h. Set cron job  using following command 
+	pi@raspberrypi ~ $  crontab -e
+	i. Press ctrl + V Till end of page
+	j. then insert cron command with file name like
+	k. */5 *  * * *  php  /var/www/ss_pool_spa/restart_system.php 
+
+
+11. Restart Raspberrypi Network. When Network is slow. 
+	a. Download updated   code from 'https://github.com/sandeepnetwin/Documents_for_raspberry/'
+	b. Extract it and copy  checknetwork.sh  and pest into /usr/local/bin/ 
+	c. Set cronjob 
+	d. */5 * * * * /usr/bin/sudo -H /usr/local/bin/checkwifi.sh >> /dev/null 2>&1
+
+12. Change Apache Port Number. 
+	a. Open port.conf file
+	b. sudo gedit /etc/apache2/ports.conf  OR sudo nano /etc/apache2/ports.conf
+	c. ports.conf file open then change 80 to 82 (any port number you want). & save the file.	
+	
+
